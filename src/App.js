@@ -1,25 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const style = {
+  margin: '1rem', 
+  padding: '1rem', 
+  border: '2px solid blue',
 }
 
-export default App;
+function Home() {
+  const nav = useNavigate();
+  const handler = () => {
+    console.log('Redirecting to login!');
+    nav('/login');
+  }
+
+  return(
+    <div style={style}>
+      <h2>Hello, Ashish!</h2>
+      <p>Not Ashish? &nbsp;<button onClick={handler}>Click Here!</button></p>
+    </div>
+  )
+}
+
+export default function App() {
+  return (
+    <BrowserRouter>
+      <h1>React Router Navigate</h1>
+      <Routes>
+        <Route path="/" element={<Home />}/>
+        <Route path="login" element={<h2 style={style}>Login Form</h2>}/>
+      </Routes>
+    </BrowserRouter>
+  );
+}
